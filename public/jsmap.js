@@ -1,0 +1,1 @@
+document.getElementById("jarak").value = jarak_in_m;

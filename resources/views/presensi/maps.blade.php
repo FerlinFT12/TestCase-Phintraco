@@ -1,129 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ $title }}</title>
-  <meta name="csrf-token" content="{{ csrf_token() }}">
+<html>
+  <head>
+    <title>Simple Map</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Tempusdominus Bootstrap 4 -->
-  <link rel="stylesheet" href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="{{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
-  <!-- JQVMap -->
-  <link rel="stylesheet" href="{{ asset('plugins/jqvmap/jqvmap.min.css') }}">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
-  <!-- summernote -->
-  <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ asset('style.css') }} " />
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBI9geoJuf4e93KofgYT4pqT_Po3xtW4yg"></script>
-  <!-- <script
-      src="https://maps.googleapis.com/maps/api/js?key="
-      defer
-    ></script> -->
-  <!-- <script>
-  function confirmPresensi() { 
-    if(confirm("Apakah Anda Yakin ingin Check In di Lokasi Anda Saat ini ?")) {
-      getLocation();
-    } else {
-      alert('Silahkan Check In Jika Lokasi Anda Sudah Tepat');
-      return false;
-    }
-  }
+    <link rel="stylesheet" type="text/css" href="{{ asset('style2.css') }} " />
+    <!-- <script type="module" src="{{ asset('index3.js') }} "></script> -->
+  </head>
+  <body>
+    <button onclick="getloc()">Get Loc</button>
+    
+    <div id="map" style="width:100%;height:500px;"></div>
+    
+    <div id="msg">s</div>
+    <button id="btncheckin">Check In</button>
+    <div id="komentar"></div>
 
-  var map, marker, circle, radius = 25;
+    <!-- 
+      The `defer` attribute causes the callback to execute after the full HTML
+      document has been parsed. For non-blocking uses, avoiding race conditions,
+      and consistent behavior across   browsers, consider loading using Promises
+      with https://www.npmjs.com/package/@googlemaps/js-api-loader.
+      -->
 
-  function initialize() {
-    var center = new google.maps.LatLng(-6.22436174037392, 106.8418477856633);
-    map = new google.maps.Map(document.getElementById("map"), {
-      center: center,
-      zoom: 15
-    });
+    <script>
+        
+        function getloc() {
+            var x = document.getElementById("demo");
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(showPosition);
+            } else { 
+              x.innerHTML = "Geolocation tidak didukung oleh browser ini.";
+            }
+        }
+    </script>
 
-    marker = new google.maps.Marker({
-      position: center,
-      map: map
-    });
 
-    circle = new google.maps.Circle({
-      strokeColor: '#0000FF',
-      strokeOpacity: 0.8,
-      strokeWeight: 2,
-      fillColor: '#0000FF',
-      map: map,
-      center: center,
-      radius: radius
-    });
-  }
-
-  function getLocation() {
-    if(navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-      alert('Geolocation Tidak Didukung Oleh Browser Ini');
-    }
-  }
-
-  function showPosition(position) {
-    var pos = new google.maps.LatLng(
-      position.coords.latitude,
-      position.coords.longitude
-    );
-
-    marker.setPosition(pos);
-    map.setCenter(pos);
-
-    var distance = google.maps.geometry.spherical.computeDistanceBetween(
-      pos, circle.getCenter()
-    );
-
-    if(distance > circle.getRadius()) {
-      document.getElementById('checkin').disabled = true;
-      alert('Kamu berada di luar radius. Tidak bisa Check In');
-    } else {
-      document.getElementById('checkin').disabled = false;
-      alert('Kamu berada di dalam radius. Bisa Check In');
-    }
-  }
-
-  google.maps.event.addDomListener(window, "load", initialize);
-</script> -->
-
-  <script>
-    function confirmPresensi() { 
-      if(confirm("Apakah Anda Yakin ingin Check In di Lokasi Anda Saat ini ?")) {
-        getLocation();
-      } else {
-        alert('Silahkan Check In Jika Lokasi Anda Sudah Tepat');
-        return false;
-      }
-    }
-
-    function getLocation() {
-      if(navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-      } else {
-        alert('Geolocation Tidak Didukung Oleh Browser Ini');
-      }
-    }
-  </script>
-
-  <script>
+    <script>
         var x = document.getElementById("demo");
         var y = document.getElementById("demo2");
      
@@ -146,8 +58,6 @@
         }
 
     function showPosition(position) {
-        document.getElementById("latitudegeo").value= position.coords.latitude;
-        document.getElementById("longitudegeo").value= position.coords.longitude;
         lat = position.coords.latitude;
         lon = position.coords.longitude;
         latlon = {lat: lat, lng: lon}
@@ -156,7 +66,7 @@
         var locs = latlon;
         var diameter = 200;
 
-        const mitrasejati = new google.maps.LatLng(-6.226518011254657, 106.8496551693218);
+        const mitrasejati = new google.maps.LatLng(-6.224312411632266, 106.84196641817114);
         // const mitrasejati = new google.maps.LatLng(-6.2264813301483475, 106.8483530233136);
         // -6.2264813301483475, 106.8483530233136
         //create the map
@@ -219,9 +129,6 @@
          if(jarak_in_m > 25) {
             document.getElementById("btncheckin").disabled = true;
             document.getElementById("komentar").innerHTML = "Jarak Anda Jauh dari Radius Kantor";
-         } else if (jarak_in_m < 25 || jarak_in_m == 25) {
-            document.getElementById("btncheckin").disabled = false;
-            document.getElementById("komentar").innerHTML = "Silahkan Check In";
          }
 
 
@@ -309,7 +216,12 @@
     
 
         
-  </script>
+</script>
 
-  <!-- <script type="module" src="{{ asset('index.js') }} "></script> -->
-</head>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBI9geoJuf4e93KofgYT4pqT_Po3xtW4yg&libraries=places&callback=initialize"
+      defer
+    ></script>
+
+  </body>
+</html>

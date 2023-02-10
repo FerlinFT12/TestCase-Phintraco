@@ -22,6 +22,9 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{{ route('project.index') }}" class="nav-link">Project</a>
       </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{ route('presensi.index') }}" class="nav-link">Presensi</a>
+      </li>
     </ul>
 
     <!-- Right navbar links -->
@@ -77,6 +80,14 @@
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Project
+              </p>
+            </a>
+          </li>
+          <li class="nav-item {{ (request()->segment(1) == 'presensi') ? 'active' : '' }}">
+            <a href="{{ route('presensi.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Presensi
               </p>
             </a>
           </li>
