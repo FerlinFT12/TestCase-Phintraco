@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Presensi;
+use App\Models\Perusahaan;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,13 +19,14 @@ class PresensiController extends Controller
      */
     public function index(Request $request)
     {
+        $perusahaan = Perusahaan::all();
         $data = [
             'title' => 'Presensi Anda',
             'title2' => 'Maps Anda dan Maps Perusahaan',
-            'isi' => 'presensi.index3',
+            'perusahaan' => $perusahaan
         ];
 
-        return view('layouts.wrapper', $data);
+        return view('presensi.index3', $data);
 
         // return view('presensi.geolocation');
         // return view('presensi.maps3chatgpt');

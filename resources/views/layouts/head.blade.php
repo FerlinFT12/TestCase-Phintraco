@@ -151,7 +151,6 @@
         lat = position.coords.latitude;
         lon = position.coords.longitude;
         latlon = {lat: lat, lng: lon}
-        var user = {lat:-6.184508853459494 , lng: 106.8311744556733 };
         const METERS_IN_MILE = 1609.344;
         var locs = latlon;
         var diameter = 200;
@@ -165,13 +164,13 @@
             center: mitrasejati
         });
 
-        const marker = new google.maps.Marker({
+        const marker = new google.maps.Marker({ //marker perusahaan
             position: mitrasejati,
             map,
             title: 'Hello World'
         });
 
-        const marker2 = new google.maps.Marker({
+        const marker2 = new google.maps.Marker({ //marker user
             position: locs,
             map,
             title: 'Hello World 2'

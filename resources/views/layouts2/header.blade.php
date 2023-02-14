@@ -1,6 +1,3 @@
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
-
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="{{ asset('dist/img/phintraco-logo.png') }}" alt="PhintracoLogo" height="60" width="60">
@@ -88,14 +85,6 @@
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Presensi
-              </p>
-            </a>
-          </li>
-          <li class="nav-item {{ (request()->segment(1) == 'spd') ? 'active' : '' }}">
-            <a href="{{ route('spd.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                SPD
               </p>
             </a>
           </li>

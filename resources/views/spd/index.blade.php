@@ -32,6 +32,77 @@
   <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('style.css') }} " />
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBI9geoJuf4e93KofgYT4pqT_Po3xtW4yg"></script>
+  <!-- <script
+      src="https://maps.googleapis.com/maps/api/js?key="
+      defer
+    ></script> -->
+  <!-- <script>
+  function confirmPresensi() { 
+    if(confirm("Apakah Anda Yakin ingin Check In di Lokasi Anda Saat ini ?")) {
+      getLocation();
+    } else {
+      alert('Silahkan Check In Jika Lokasi Anda Sudah Tepat');
+      return false;
+    }
+  }
+
+  var map, marker, circle, radius = 25;
+
+  function initialize() {
+    var center = new google.maps.LatLng(-6.22436174037392, 106.8418477856633);
+    map = new google.maps.Map(document.getElementById("map"), {
+      center: center,
+      zoom: 15
+    });
+
+    marker = new google.maps.Marker({
+      position: center,
+      map: map
+    });
+
+    circle = new google.maps.Circle({
+      strokeColor: '#0000FF',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: '#0000FF',
+      map: map,
+      center: center,
+      radius: radius
+    });
+  }
+
+  function getLocation() {
+    if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      alert('Geolocation Tidak Didukung Oleh Browser Ini');
+    }
+  }
+
+  function showPosition(position) {
+    var pos = new google.maps.LatLng(
+      position.coords.latitude,
+      position.coords.longitude
+    );
+
+    marker.setPosition(pos);
+    map.setCenter(pos);
+
+    var distance = google.maps.geometry.spherical.computeDistanceBetween(
+      pos, circle.getCenter()
+    );
+
+    if(distance > circle.getRadius()) {
+      document.getElementById('checkin').disabled = true;
+      alert('Kamu berada di luar radius. Tidak bisa Check In');
+    } else {
+      document.getElementById('checkin').disabled = false;
+      alert('Kamu berada di dalam radius. Bisa Check In');
+    }
+  }
+
+  google.maps.event.addDomListener(window, "load", initialize);
+</script> -->
 
   <script>
     function confirmPresensi() { 
@@ -51,8 +122,6 @@
       }
     }
   </script>
-
-  
 
   <script>
         var x = document.getElementById("demo");
@@ -76,195 +145,165 @@
             return d;
         }
 
-    const dataperusahaan = @json($perusahaan); //menyimpan data lat, long perusahaan ke dalam array javascript
-        
     function showPosition(position) {
         document.getElementById("latitudegeo").value= position.coords.latitude;
         document.getElementById("longitudegeo").value= position.coords.longitude;
         lat = position.coords.latitude;
         lon = position.coords.longitude;
         latlon = {lat: lat, lng: lon}
+        var user = {lat:-6.184508853459494 , lng: 106.8311744556733 };
         const METERS_IN_MILE = 1609.344;
-        const locs = latlon;
+        var locs = latlon;
         var diameter = 200;
 
-        const phincon = new google.maps.LatLng(-6.2243585897018185, 106.84186113263642); //lat long phincon sebagai center maps
+        const mitrasejati = new google.maps.LatLng(-6.226518011254657, 106.8496551693218);
+        // const mitrasejati = new google.maps.LatLng(-6.2264813301483475, 106.8483530233136);
+        // -6.2264813301483475, 106.8483530233136
         //create the map
         const map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 14,
-            center: phincon
+            zoom: 16,
+            center: mitrasejati
         });
 
-        let isAtCompany = false;
-        
-        const markeruser = new google.maps.Marker({ //marker user
+        const marker = new google.maps.Marker({
+            position: mitrasejati,
+            map,
+            title: 'Hello World'
+        });
+
+        const marker2 = new google.maps.Marker({
             position: locs,
             map,
-            title: 'Marker User'
+            title: 'Hello World 2'
         });
 
-        const infoWindowuser = new google.maps.InfoWindow({ //infoWindow user
+        const infoWindow = new google.maps.InfoWindow({
+            content: "<p>Lat Long PT. Mitra Sejati Pertama</p>",
+            ariaLabel: "Mitra Sejati Pertama"
+        });
+
+        const infoWindowgeo = new google.maps.InfoWindow({
             content: "<p>Lat Long User</p>",
             ariaLabel: "User"
         });
 
-        markeruser.addListener("click", () => { //marker user ketika di klik
-            infoWindowuser.open({
-            anchor: markeruser,
+        marker.addListener("click", () => {
+            infoWindow.open({
+            anchor: marker,
             map
             });
         });
 
-        var mkuser = new google.maps.Marker({position: locs, map: map});
-
-        //looping untuk mengecek lokasi saat ini dengan lokasi-lokasi perusahaan
-        for(let i = 0; i < dataperusahaan.length; i++) {
-          const dtperusahaan = dataperusahaan[i];
-          const nama_perusahaan = dtperusahaan.nama_perusahaan;
-          const company = new google.maps.LatLng(dtperusahaan.latitude, dtperusahaan.longitude); //lat long perusahaan yang di looping
-
-          const markercompany = new google.maps.Marker({ //marker perusahaan yang di looping
-            position: company,
-            map,
-            title: 'Company'
-          });
-
-          const infoWindow = new google.maps.InfoWindow({ //infoWindow perusahaan yang di looping
-            content: nama_perusahaan,
-            ariaLabel: "Company"
-          });
-
-          markercompany.addListener("click", () => { //marker perusahaan yang di looping dan diklik
-            infoWindow.open({
-            anchor: markercompany,
+        marker2.addListener("click", () => {
+            infoWindowgeo.open({
+            anchor: marker2,
             map
             });
-          });
+        });
 
-          var mkcompany = new google.maps.Marker({position: company, map: map}); //marker perusahaan yang di looping. variabel ini digunakan untuk menghitung jarak perusahaan dengan user
-          
-          // Calculate and display the distance between markers company - user
-          const distance = haversine_distance(mkcompany, mkuser);
-          
-          const jarak_in_m = distance.toFixed(2) * METERS_IN_MILE; //jarak dalam satuan meter
-          
-          if (jarak_in_m <= 25 && jarak_in_m <= 50) { // jika jarak <= 25 meter, maka isAtCompany = true, isAtCompany akan digunakan untuk menampilkan keterangan dan btn Check In
-            document.getElementById('msg').innerHTML = "Jarak Anda dengan Kantor Terdeket : " + distance.toFixed(2) + " mi atau "+jarak_in_m +" meter. lat : ";
-            document.getElementById("btncheckin").disabled = false;
-            document.getElementById("komentar").innerHTML = "Silahkan Check In";
-          } else if(jarak_in_m > 25 && jarak_in_m <= 50) {
-            document.getElementById('msg').innerHTML = "Jarak Anda dengan Kantor Terdeket : " + distance.toFixed(2) + " mi atau "+jarak_in_m +" meter. lat : ";
+          // The markers for The Dakota and The Frick Collection
+        var mk1 = new google.maps.Marker({position: mitrasejati, map: map});
+        var mk2 = new google.maps.Marker({position: locs, map: map});
+
+        //draw a line showing the straight distance between the markers
+        var line = new google.maps.Polyline({
+            path: [mitrasejati, locs],
+            map: map
+        });
+    
+         // Calculate and display the distance between markers
+         var distance = haversine_distance(mk1, mk2);
+         var jarak_in_m = distance.toFixed(2) * METERS_IN_MILE;
+         document.getElementById('msg').innerHTML = "Distance between markers: " + distance.toFixed(2) + " mi atau "+jarak_in_m +" meter. lat : ";
+
+         if(jarak_in_m > 25) {
             document.getElementById("btncheckin").disabled = true;
             document.getElementById("komentar").innerHTML = "Jarak Anda Jauh dari Radius Kantor";
-          }
-          
-          var linecompanyuser = new google.maps.Polyline({ // garis polyline user dengan perusahaan dalam looping 
-            path: [company, locs],
-            map: map
-          });
-          
-        }
-
-        // if(isAtCompany) {
-          //draw a line showing the straight distance between the markers phincon - user
-          // var linecompanyuser = new google.maps.Polyline({
-          //     path: [terdekat, locs],
-          //     map: map
-          //   });
-        // }
+         } else if (jarak_in_m < 25 || jarak_in_m == 25) {
+            document.getElementById("btncheckin").disabled = false;
+            document.getElementById("komentar").innerHTML = "Silahkan Check In";
+         }
 
 
-        // const phincon = new google.maps.LatLng(-6.2243585897018185, 106.84186113263642);
-        // const phintech = new google.maps.LatLng(-6.229169833011968, 106.82525700395708);
-        //create the map
-        // const map = new google.maps.Map(document.getElementById("map"), {
-            // zoom: 14,
-            // center: phincon
-        // });
-
-        // const markerphincon = new google.maps.Marker({ //marker perusahaan phincon
-        //     position: phincon,
-        //     map,
-        //     title: 'Phincon'
-        // });
-
-        // const markerphintech = new google.maps.Marker({ //marker perusahaan phintech
-        //     position: phintech,
-        //     map,
-        //     title: 'Phintech'
-        // });
-
-        // const markeruser = new google.maps.Marker({ //marker user
-        //     position: locs,
-        //     map,
-        //     title: 'Marker User'
-        // });
-
-        // const infoWindowphincon = new google.maps.InfoWindow({
-        //     content: "<p>Lat Long PT. Phincon</p>",
-        //     ariaLabel: "Phincon"
-        // });
-
-        // const infoWindowphintech = new google.maps.InfoWindow({
-        //     content: "<p>Lat Long PT. Phintech</p>",
-        //     ariaLabel: "Phintech"
-        // });
-
-        // const infoWindowuser = new google.maps.InfoWindow({
-        //     content: "<p>Lat Long User</p>",
-        //     ariaLabel: "User"
-        // });
-
-        // markerphincon.addListener("click", () => {
-        //     infoWindowphincon.open({
-        //     anchor: markerphincon,
-        //     map
+        // var usermenko = {lat:-6.1694498469866295 , lng: 106.8378371553251 };
+        //(diameter 100 nggak sampek pintu masuk depat tempat mobil biasanya nurunin)
+        // var usermenko = {lat:-6.169785615408362, lng: 106.83720165493625 }; 
+        //   // (kalau diameter 100 nggak sampek deputi bidang koordinasi kerjasama, kalau 120 sampek)
+        //   var usermenko = {lat:-6.169630948351483, lng: 106.83754229546858 }; 
+        //   //(diameter 100 sudah menjangkau bagian depan pintu masuk dan deputi bidang koordinasi kerjasama)
+        //   var locs = latlon;
+        //   var diametermenko = 140;
+        
+        //   var myOptions = {
+        //       center:locs,
+        //       zoom:16,
+        //       mapTypeId:google.maps.MapTypeId.ROADMAP
+        //   }
+        
+        //   var map = new google.maps.Map(document.getElementById("map"), myOptions); //membuat peta lokasi
+        //   var user_marker = new google.maps.Marker({ //membuat marker pada peta
+        //       position:locs,
+        //       map:map,
+        //       title:"You are here!"
+        //   });
+        //   const namapegawai = '<p>test admin</p>';
+        //   const infowindow = new google.maps.InfoWindow({
+        //       content: namapegawai,
+        //   });
+        
+        //   user_marker.addListener("click",()=> {
+        //       infowindow.open(map,user_marker);
+        //   });
+        //   var cityCircle = new google.maps.Circle({ //created a circle to mark the radius
+        //         strokeColor: '#FF0000',
+        //         strokeOpacity: 0.8,
+        //         strokeWeight: 2,
+        //         fillColor: '#FF0000',
+        //         fillOpacity: 0.35,
+        //         map: map,
+        //         center: user,
+        //         radius: diameter,
+        //         clickable: false
         //     });
-        // });
 
-        // markerphintech.addListener("click", () => {
-        //     infoWindowphintech.open({
-        //     anchor: markerphintech,
-        //     map
+        //   var menkoCircle = new google.maps.Circle({ //created a circle to mark the radius
+        //         strokeColor: '#FF0000',
+        //         strokeOpacity: 0.8,
+        //         strokeWeight: 2,
+        //         fillColor: '#FF0000',
+        //         fillOpacity: 0.35,
+        //         map: map,
+        //         center: usermenko,
+        //         radius: diametermenko,
+        //         clickable: false
         //     });
-        // });
+        
+        //   x.innerHTML = "<input type=\"hidden\" name=\"latitude\" id=\"latitude\" value="+position.coords.latitude+"><br><input type=\"hidden\" name=\"longitude\" id=\"longitude\" value="+position.coords.longitude+">";
+        //   var z = arePointsNear(user, locs, diameter);
+        //   console.log(locs);
+        //   if(z){ //jika n ada, artinya di dalam circle
+        //             marker = new google.maps.Marker({
+        //                 map: map,
+        //                 position: locs,
+        //                 label: {
+        //                 text:"I", //marking all jobs inside radius with I
+        //                 color:"white"
+        //                 }
+        //             });
+        //             y.innerHTML = "<input type=\"text\" name=\"jarak\" id=\"jarak\" value="+z+">";
+        //         } else { //jika n tidak ada, artinya di diluar circle
+        //             // marker = new google.maps.Marker({
+        //             //     map: map,
+        //             //     position: locs,
+        //             //     label: {
+        //             //     text:"O", //marking all jobs outside radius with O
+        //             //     color:"white"
+        //             //     }
+        //             // });
+        //             // y.innerHTML = "<input type=\"text\" name=\"jarak\" id=\"jarak\" value="+z+">";
 
-        // markeruser.addListener("click", () => {
-        //     infoWindowuser.open({
-        //     anchor: markeruser,
-        //     map
-        //     });
-        // });
-
-          // The markers for Phincon, Phintech dan User
-        // var mkphincon = new google.maps.Marker({position: phincon, map: map});
-        // var mkphintech = new google.maps.Marker({position: phintech, map: map});
-        // var mkuser = new google.maps.Marker({position: locs, map: map});
-
-        // //draw a line showing the straight distance between the markers phincon - user
-        // var linephinconuser = new google.maps.Polyline({
-        //     path: [phincon, locs],
-        //     map: map
-        // });
-
-        //draw a line showing the straight distance between the markers phintech - user
-        // var linephintechuser = new google.maps.Polyline({
-        //     path: [phintech, locs],
-        //     map: map
-        // });
-    
-         // Calculate and display the distance between markers phincon - user
-        //  var distance = haversine_distance(mkphincon, mkuser);
-        //  var jarak_in_m = distance.toFixed(2) * METERS_IN_MILE;
-        //  document.getElementById('msg').innerHTML = "Distance between markers: " + distance.toFixed(2) + " mi atau "+jarak_in_m +" meter. lat : ";
-
-        //  if(jarak_in_m > 25) {
-        //     document.getElementById("btncheckin").disabled = true;
-        //     document.getElementById("komentar").innerHTML = "Jarak Anda Jauh dari Radius Kantor";
-        //  } else if (jarak_in_m < 25 || jarak_in_m == 25) {
-        //     document.getElementById("btncheckin").disabled = false;
-        //     document.getElementById("komentar").innerHTML = "Silahkan Check In";
-        //  }
+        //             window.alert("Anda tidak bisa absen WFO jika lokasi di luar radius");
+        //         }
     }
 
     
@@ -274,114 +313,10 @@
 
   <!-- <script type="module" src="{{ asset('index.js') }} "></script> -->
 </head>
-
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
-  <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="{{ asset('dist/img/phintraco-logo.png') }}" alt="PhintracoLogo" height="60" width="60">
-  </div>
-
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{ route('home') }}" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{ route('user.index') }}" class="nav-link">User</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{ route('project.index') }}" class="nav-link">Project</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{ route('presensi.index') }}" class="nav-link">Presensi</a>
-      </li>
-    </ul>
-
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item dropdown">
-        <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">{{ auth()->user()->name }}</a>
-        <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-          <li>
-            <form action="{{ route('logout') }}" method="POST">
-              @csrf
-              <button type="submit" class="dropdown-item">Logout </buttton>
-            </form>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </nav>
-  <!-- /.navbar -->
-
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="{{ route('home') }}" class="brand-link">
-    <img src="{{ asset('dist/img/phintraco-logo.png') }}" alt="Phintraco Group Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Phintraco</span>
-    </a>
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">{{ Auth()->user()->name }}</a>
-        </div>
-      </div>
-
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <li class="nav-item {{ (request()->segment(1) == 'user') ? 'active' : '' }}">
-            <a href="{{ route('user.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
-              <p>
-                User
-              </p>
-            </a>
-          </li>
-          <li class="nav-item {{ (request()->segment(1) == 'project') ? 'active' : '' }}">
-            <a href="{{ route('project.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Project
-              </p>
-            </a>
-          </li>
-          <li class="nav-item {{ (request()->segment(1) == 'presensi') ? 'active' : '' }}">
-            <a href="{{ route('presensi.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Presensi
-              </p>
-            </a>
-          </li>
-          <li class="nav-item {{ (request()->segment(1) == 'spd') ? 'active' : '' }}">
-            <a href="{{ route('spd.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                SPD
-              </p>
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
+@extends('layouts2.header')
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -390,7 +325,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-12 col-12">
-            <h1 class="m-0">{{ $title }}</h1>
+            <h1 class="m-0">Project</h1>
                 @if (session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
@@ -423,49 +358,27 @@
           <div class="card">
               <div class="card-header">
                 <h3 class="card-title">{{ $title }}</h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-                <!-- <form action="{{ route('presensi.store') }}" method="POST"> -->
-                    <!-- @csrf -->
-                    <br>
-                    <button class="btn btn-primary" onclick="confirmPresensi()"> Get My Location</button>
-                    
-                    <form action="{{route ('presensi.store') }}" method="POST">
-                    @csrf
-                    <input type="text" name="latitudegeo" id="latitudegeo" hidden>
-                    <input type="text" name="longitudegeo" id="longitudegeo" hidden>
-                    
-                    <button type="submit" id="btncheckin" class="btn btn-danger" disabled>Check In</button>
-                  </form>
+                <a class="btn btn-primary float-right" href="{{ route('project.create') }}"><i class="fas fa-plus"></i> Tambah Project</a>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table class="table table-bordered table-hover tblproject">
+                  <thead>
+                  <tr>
+                    <th>ID.</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Start At</th>
+                    <th>Finish At</th>
+                    <th>Aksi</th>
+                  </tr>
+                  </thead>
+                  <tbody>
                   
-                  <div id="komentar"></div>
-                  <div id="msg"></div>
-                  <div id="asdasd"></div>
-                    
-                <!-- </form> -->
-
-                <!-- <div id="map" style="width:100%;height:500px;"></div>
-                <button id="checkin" disabled> Check In </button> -->
-            </div>
-            <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">{{ $title2 }}</h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-                <!-- <form action="{{ route('presensi.store') }}" method="POST"> -->
-                    <!-- @csrf -->
-                    <!-- <button class="btn btn-primary" onclick="confirmPresensi()"> Get My Location</button> -->
-                <!-- </form> -->
-
-                <div id="map" style="width:100%;height:500px;"></div>
-            </div>
-            <!-- /.card-body -->
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
             </div>
             <!-- /.card -->
           </div>
@@ -477,9 +390,6 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
-
-
   <footer class="main-footer">
     <strong>Copyright &copy; <?php date('Y'); ?> <a href="{{ route('home') }}">Phintraco Technology</a>.</strong>
     All rights reserved.

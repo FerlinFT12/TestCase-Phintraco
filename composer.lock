@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8876fff9fe4334c766a598c63d36da1c",
+    "content-hash": "e8d006f823e8e251c0d605538f0db87f",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2113,6 +2113,71 @@
             "time": "2023-01-06T15:55:01+00:00"
         },
         {
+            "name": "netsuitephp/netsuite-laravel",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/netsuitephp/netsuite-laravel.git",
+                "reference": "6b97bbcd7af8b34c0e2b513e36c05d485627bb9a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/netsuitephp/netsuite-laravel/zipball/6b97bbcd7af8b34c0e2b513e36c05d485627bb9a",
+                "reference": "6b97bbcd7af8b34c0e2b513e36c05d485627bb9a",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2.5|^8.0",
+                "ryanwinchester/netsuite-php": "*"
+            },
+            "require-dev": {
+                "illuminate/config": "^7|^8",
+                "illuminate/support": "^7|^8"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "NetSuite\\Providers\\NetSuiteServiceProvider"
+                    ],
+                    "aliases": {
+                        "NetSuite": "NetSuite\\Facades\\NetSuite"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NetSuite\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "James Gilliland (neclimdul)",
+                    "email": "neclimdul@gmail.com"
+                },
+                {
+                    "name": "Justin Rebelo (jrebs)",
+                    "homepage": "https://github.com/jrebs"
+                }
+            ],
+            "description": "NetSuite PHP laravel provider wrapper",
+            "keywords": [
+                "api",
+                "laravel",
+                "netsuite",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/netsuitephp/netsuite-laravel/issues",
+                "source": "https://github.com/netsuitephp/netsuite-laravel/tree/v1.0"
+            },
+            "time": "2021-04-21T19:47:02+00:00"
+        },
+        {
             "name": "nette/schema",
             "version": "v1.2.3",
             "source": {
@@ -2379,6 +2444,56 @@
                 "source": "https://github.com/opis/closure/tree/3.6.3"
             },
             "time": "2022-01-27T09:35:39+00:00"
+        },
+        {
+            "name": "paragonie/random_compat",
+            "version": "v9.99.100",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paragonie/random_compat.git",
+                "reference": "996434e5492cb4c3edcb9168db6fbb1359ef965a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/996434e5492cb4c3edcb9168db6fbb1359ef965a",
+                "reference": "996434e5492cb4c3edcb9168db6fbb1359ef965a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">= 7"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*|5.*",
+                "vimeo/psalm": "^1"
+            },
+            "suggest": {
+                "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paragon Initiative Enterprises",
+                    "email": "security@paragonie.com",
+                    "homepage": "https://paragonie.com"
+                }
+            ],
+            "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
+            "keywords": [
+                "csprng",
+                "polyfill",
+                "pseudorandom",
+                "random"
+            ],
+            "support": {
+                "email": "info@paragonie.com",
+                "issues": "https://github.com/paragonie/random_compat/issues",
+                "source": "https://github.com/paragonie/random_compat"
+            },
+            "time": "2020-10-15T08:29:30+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -3211,6 +3326,67 @@
                 }
             ],
             "time": "2022-05-28T13:28:03+00:00"
+        },
+        {
+            "name": "ryanwinchester/netsuite-php",
+            "version": "v2022.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/netsuitephp/netsuite-php.git",
+                "reference": "5e0085fa106acee7b23e3ae13ce09d100fc7a520"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/netsuitephp/netsuite-php/zipball/5e0085fa106acee7b23e3ae13ce09d100fc7a520",
+                "reference": "5e0085fa106acee7b23e3ae13ce09d100fc7a520",
+                "shasum": ""
+            },
+            "require": {
+                "ext-openssl": "*",
+                "ext-simplexml": "*",
+                "ext-soap": "*",
+                "paragonie/random_compat": ">=1",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "mikey179/vfsstream": "^1.6",
+                "phpspec/phpspec": ">=5",
+                "phpunit/phpunit": "^9.5"
+            },
+            "suggest": {
+                "symfony/dotenv": "Provides loading a .env file for obtaining config variables",
+                "vlucas/phpdotenv": "Provides loading a .env file for obtaining config variables"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/includes/functions.php"
+                ],
+                "psr-4": {
+                    "NetSuite\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Ryan Winchester (fungku)",
+                    "email": "fungku@gmail.com"
+                }
+            ],
+            "description": "NetSuite PHP API wrapper",
+            "keywords": [
+                "api",
+                "netsuite",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/netsuitephp/netsuite-php/issues",
+                "source": "https://github.com/netsuitephp/netsuite-php/tree/v2022.1.1"
+            },
+            "time": "2022-08-02T21:51:08+00:00"
         },
         {
             "name": "stevebauman/location",

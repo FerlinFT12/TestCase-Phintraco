@@ -6,6 +6,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\PresensimasukController;
+use App\Http\Controllers\SPDController;
+use App\Http\Controllers\PerusahaanController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +39,8 @@ Route::resource('presensi', PresensiController::class)->middleware('auth');
 // Route::match(['get', 'post'], 'presensi/store', [PresensiController::class, 'store'])->name('presensi.store');
 Route::resource('presensimasuk', PresensimasukController::class)->middleware('auth');
 
+Route::resource('spd', SPDController::class)->middleware('auth');
+Route::resource('perusahaan', PerusahaanController::class)->middleware('auth');
 
 Route::get('radius', [PresensiController::class, 'radiuscheck']);
 
