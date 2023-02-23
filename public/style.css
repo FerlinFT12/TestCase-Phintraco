@@ -1,0 +1,53 @@
+.sidebar-phinter {
+    background: #1E3572 0% 0% no-repeat padding-box;
+    border-radius: 0px 8px 8px 0px;
+    opacity: 1;
+}
+
+.layout-navbar-fixed
+    .wrapper
+    .sidebar-phinter
+    .brand-link:not([class*="navbar"]) {
+    background-color: #1e3572;
+}
+
+/* .nav-sidebar > .nav-item:hover .nav-link {
+    background-color: #CACACA;
+}
+
+.nav-sidebar > .nav-item .nav-treeview > .nav-item:hover > .nav-link {
+    background-color: #e8ebf1;
+} */
+
+.nav-sidebar .nav-item:hover > .nav-link {
+    background-color: #CACACA;
+}
+
+/* Efek hover untuk submenu */
+.nav-sidebar .nav-item .nav-treeview .nav-item .nav-link:hover {
+    background-color: #CACACA;
+}
+
+h1,h2,p,a{
+    font-family: sans-serif;
+    font-weight: normal;
+  }
+
+  .jam-digital-malasngoding {
+    overflow: hidden;
+    width: 330px;
+    margin: 20px auto;
+    border: 5px solid #efefef;
+  }
+  .kotak{
+    float: left;
+    width: 110px;
+    height: 100px;
+    background-color: #189fff;
+  }
+  .jam-digital-malasngoding p {
+    color: #fff;
+    font-size: 36px;
+    text-align: center;
+    margin-top: 30px;
+  }
