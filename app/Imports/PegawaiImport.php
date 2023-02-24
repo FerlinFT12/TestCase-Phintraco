@@ -3,10 +3,10 @@
 namespace App\Imports;
 
 use App\Models\Pegawai;
-use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class PegawaiImport implements ToModel
+class PegawaiImport implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row
@@ -15,14 +15,14 @@ class PegawaiImport implements ToModel
     */
     public function model(array $row)
     {
-        $parent_uuid = $row[0];
-        $company_id = $row[1];
-        $department_code = $row[2];
-        $name = $row[3];
-        $email = $row[4];
-        $empl_id = $row[5];
-        $join_date = $row[6];
-        $ext_no = $row[7];
+        $parent_uuid = $row['parent_uuid'];
+        $company_id = $row['company_id'];
+        $department_code = $row['department_code'];
+        $name = $row['name'];
+        $email = $row['email'];
+        $empl_id = $row['empl_id'];
+        $join_date = $row['join_date'];
+        $ext_no = $row['ext_no'];
         
         $data = [
             'parent_uuid' => $parent_uuid,

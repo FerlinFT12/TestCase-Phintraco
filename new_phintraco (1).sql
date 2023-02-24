@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 24, 2023 at 08:47 AM
+-- Generation Time: Feb 24, 2023 at 10:04 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -150,11 +150,16 @@ CREATE TABLE `pegawais` (
 --
 
 INSERT INTO `pegawais` (`uuid`, `parent_uuid`, `company_id`, `department_code`, `name`, `email`, `empl_id`, `join_date`, `ext_no`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`) VALUES
-('5dd3e33a-b417-11ed-baa4-46579262b49d', 'EB7DBB5D-5F49-4B1A-8254-225A677D6385', 7, 'DEPTBD', 'Qori', 'qori@phintraco.com', '2220714011-QSW', '2022-09-14', '0', '2023-02-24 00:46:36', '2023-02-24 00:46:36', NULL, 1, 1, NULL),
+('00550abe-b420-11ed-baa4-46579262b49d', 'EB7DBB5D-5F49-4B1A-8254-225A677D6385', 7, 'DEPTBD', 'Soni', 'soni@phintraco.com', '2220714011-SON', '2023-02-23', '0', '2023-02-24 01:48:25', '2023-02-24 01:48:25', NULL, 1, 1, NULL),
+('36949dbe-b421-11ed-baa4-46579262b49d', 'EB7DBB5D-5F49-4B1A-8254-225A677D6385', 7, 'DEPTBD', 'Firdaus', 'firdaus@phintraco.com', '2220714011-FIR', '2022-12-04', NULL, '2023-02-24 01:57:06', '2023-02-24 01:57:06', NULL, 1, 1, NULL),
+('5dd3e33a-b417-11ed-baa4-46579262b49d', 'EB7DBB5D-5F49-4B1A-8254-225A677D6385', 7, 'DEPTBD', 'Qori', 'qori.sasi@phintraco.com', '2220714011-QSW', '2022-09-14', '0', '2023-02-24 00:46:36', '2023-02-24 01:02:49', NULL, 1, 1, NULL),
 ('64a9aae4-b3f6-11ed-baa4-46579262b49d', 'EB7DBB5D-5F49-4B1A-8254-225A677D6385', 7, 'DEPTBD', 'Ferlin Firdaus Turnip', 'firdaus.turnip@phintraco.com', '2230201061-FET', '2023-02-01', '123', '2023-02-23 20:24:36', '2023-02-23 20:24:36', NULL, 1, 1, NULL),
 ('6eb480de-b3f8-11ed-baa4-46579262b49d', '16348673-00E7-427A-A4BB-0799F3244044', 7, 'PTIN', 'Vincent Philips Siahaya', 'vincent@phintraco.com', '2080310011-VS', '2008-03-10', '0', '2023-02-23 21:05:10', '2023-02-23 21:05:10', NULL, 1, 1, NULL),
-('964a885a-b416-11ed-baa4-46579262b49d', 'EB7DBB5D-5F49-4B1A-8254-225A677D6385', 7, 'DEPTBD', 'Sabdella Legi', 'legi@phintraco.com', '2220714011-SDL', '2022-08-14', '0', '2023-02-24 00:41:02', '2023-02-24 00:46:36', NULL, 1, 1, NULL),
-('f10398cc-b3f8-11ed-baa4-46579262b49d', 'EB7DBB5D-5F49-4B1A-8254-225A677D6385', 7, 'DEPTBD', 'Iqoma Gumelar Rachman', 'iqoma.ra@phintraco.com', '2220714011-IQG', '2022-07-14', '0', '2023-02-23 21:08:49', '2023-02-24 00:46:36', NULL, 1, 1, NULL);
+('81925360-b421-11ed-baa4-46579262b49d', 'EB7DBB5D-5F49-4B1A-8254-225A677D6385', 7, 'DEPTBD', 'Frand State Trump', 'frand.trump@phintraco.com', '2220714011-FST', '2022-12-10', NULL, '2023-02-24 01:59:11', '2023-02-24 02:02:46', NULL, 1, 1, NULL),
+('964a885a-b416-11ed-baa4-46579262b49d', 'EB7DBB5D-5F49-4B1A-8254-225A677D6385', 7, 'DEPTBD', 'Sabdella', 'sabdella@phintraco.com', '2220714011-SDL', '2023-01-01', '0', '2023-02-24 00:41:02', '2023-02-24 01:48:25', NULL, 1, 1, NULL),
+('a7f7b024-b41f-11ed-baa4-46579262b49d', 'EB7DBB5D-5F49-4B1A-8254-225A677D6385', 7, 'DEPTBD', 'Lalala', 'lalala@phintraco.com', '2220714011-LLL', '2023-02-24', '0', '2023-02-24 01:45:57', '2023-02-24 01:45:57', NULL, 1, 1, NULL),
+('dde199d8-b420-11ed-baa4-46579262b49d', 'EB7DBB5D-5F49-4B1A-8254-225A677D6385', 7, 'DEPTBD', 'Turnip Firdaus', 'turnip@phintraco.com', '2220714011-TUR', '2022-10-02', NULL, '2023-02-24 01:54:37', '2023-02-24 01:57:06', NULL, 1, 1, NULL),
+('f10398cc-b3f8-11ed-baa4-46579262b49d', 'EB7DBB5D-5F49-4B1A-8254-225A677D6385', 7, 'DEPTBD', 'Iqoma Gumelar Rachman', 'iqoma.rachman@phintraco.com', '2220714011-IQG', '2022-07-14', '0', '2023-02-23 21:08:49', '2023-02-24 01:02:49', NULL, 1, 1, NULL);
 
 -- --------------------------------------------------------
 

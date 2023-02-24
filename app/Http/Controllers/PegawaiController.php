@@ -21,18 +21,44 @@ class PegawaiController extends Controller
     public function prosesimportpegawai(Request $request) {
         $data = Excel::toArray(new PegawaiImport, $request->file);
         foreach($data[0] as $row) {
-            Pegawai::updateorCreate([
-                'empl_id' => $row[5]
-            ], [
-                'parent_uuid' => $row[0],
-                'company_id' => $row[1],
-                'department_code' => $row[2],
-                'name' => $row[3],
-                'email' => $row[4],
-                'empl_id' => $row[5],
-                'join_date' => $row[6],
-                'ext_no' => $row[7]
-            ]);
+            $pegawai = Pegawai::where('empl_id', $row['empl_id'])->first();
+
+            if($pegawai) {
+                $pegawai->parent_uuid = $row['parent_uuid'];
+                $pegawai->company_id = $row['company_id'];
+                $pegawai->department_code = $row['department_code'];
+                $pegawai->name = $row['name'];
+                $pegawai->email = $row['email'];
+                $pegawai->empl_id = $row['empl_id'];
+                $pegawai->join_date = $row['join_date'];
+                $pegawai->ext_no = $row['ext_no'];
+                $pegawai->save();
+            } else {
+                Pegawai::create([
+                    'parent_uuid' => $row['parent_uuid'],
+                    'company_id' => $row['company_id'],
+                    'department_code' => $row['department_code'],
+                    'name' => $row['name'],
+                    'email' => $row['email'],
+                    'empl_id' => $row['empl_id'],
+                    'join_date' => $row['join_date'],
+                    'ext_no' => $row['ext_no']
+                ]);
+            }
+
+
+            // Pegawai::updateorCreate([
+            //     'empl_id' => $row['empl_id'],
+            // ], [
+            //     'parent_uuid' => $row[0],
+            //     'company_id' => $row[1],
+            //     'department_code' => $row[2],
+            //     'name' => $row[3],
+            //     'email' => $row[4],
+            //     'empl_id' => $row[5],
+            //     'join_date' => $row[6],
+            //     'ext_no' => $row[7]
+            // ]);
         }
         return redirect()->route('pegawai.index')
         ->with(['success' => 'Data Pegawai Berhasil Diimport!']);
