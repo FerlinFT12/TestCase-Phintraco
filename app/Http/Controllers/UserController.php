@@ -50,11 +50,10 @@ class UserController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'List User',
-            'isi' => 'user.index',  
+            'title' => 'List User', 
         ];
 
-        return view('layouts.wrapper', $data);
+        return view('user.index', $data);
     }
 
     /**

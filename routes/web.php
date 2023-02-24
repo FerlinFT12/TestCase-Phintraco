@@ -8,8 +8,8 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\PresensimasukController;
 use App\Http\Controllers\SPDController;
+use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PerusahaanController;
-use App\Http\Controllers\API\ItemController;
 use App\Http\Controllers\TestingController;
 use Illuminate\Support\Facades\Route;
 
@@ -46,6 +46,13 @@ Route::resource('presensi', PresensiController::class)->middleware('auth');
 Route::resource('presensimasuk', PresensimasukController::class)->middleware('auth');
 
 Route::resource('spd', SPDController::class)->middleware('auth');
+Route::get('showpegawais', [PegawaiController::class, 'showpegawai'])->name('showpegawais');
+Route::get('pegawai/importpegawai', [PegawaiController::class, 'importpegawai'])->name('pegawai.importpegawai')->middleware('auth');
+Route::get('cthpegawai', [PegawaiController::class, 'cthpegawai']);
+Route::resource('pegawai', PegawaiController::class)->middleware('auth');
+Route::post('pegawai/prosesimportuser', [PegawaiController::class, 'prosesimportpegawai'])->name('pegawai.prosesimportpegawai')->middleware('auth');
+
+
 Route::get('spd2',[SPDController::class, 'index2']);
 Route::get('spd3',[SPDController::class, 'index3']);
 Route::get('spd4',[SPDController::class, 'index4']);

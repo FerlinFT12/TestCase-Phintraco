@@ -150,6 +150,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item {{ (request()->segment(1) == 'pegawai') ? 'active' : '' }}">
+            <a href="{{ route('pegawai.index') }}" class="nav-link text-white">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Pegawai
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
